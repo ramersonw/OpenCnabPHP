@@ -23,133 +23,106 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace CnabPHP\resources\B033\remessa\cnab400;
 
 use \CnabPHP\resources\generico\remessa\cnab400\Generico0;
+
+use CnabPHP\RemessaAbstract;
 
 class Registro0 extends Generico0
 {
 
     protected $meta = array(
-        'codigo_banco' => array(
-            'tamanho' => 3,
-            'default' => '033',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'codigo_lote' => array(
-            'tamanho' => 4,
-            'default' => '0000',
-            'tipo' => 'int',
-            'required' => true
-        ),
         'tipo_registro' => array(
             'tamanho' => 1,
             'default' => '0',
             'tipo' => 'int',
             'required' => true
         ),
-        'filler1' => array(
-            'tamanho' => 8,
-            'default' => ' ',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'tipo_inscricao' => array(
-            'tamanho' => 1,
-            'default' => '',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'numero_inscricao' => array(
-            'tamanho' => 15,
-            'default' => '',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'agencia' => array(
-            'tamanho' => 4,
-            'default' => '',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'filler12' => array(
-            'tamanho' => 4,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'codigo_beneficiario' => array(
-            'tamanho' => 6,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'codigo_beneficiario_dv' => array(
-            'tamanho' => 1,
-            'default' => '0',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'filler2' => array(
-            'tamanho' => 25,
-            'default' => ' ',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'nome_empresa' => array(
-            'tamanho' => 30,
-            'default' => '',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'nome_banco' => array(
-            'tamanho' => 30,
-            'default' => 'BANCO SANTANDER',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'filler3' => array(
-            'tamanho' => 10,
-            'default' => ' ',
-            'tipo' => 'alfa',
-            'required' => true
-        ),
-        'codigo_remessa' => array(
+        'operacao' => array(
             'tamanho' => 1,
             'default' => '1',
             'tipo' => 'int',
             'required' => true
         ),
-        'data_geracao' => array(
-            'tamanho' => 8,
+        'literal_remessa' => array(
+            'tamanho' => 7,
+            'default' => 'REMESSA',
+            'tipo' => 'alfa',
+            'required' => true
+        ),
+        'tipo_servico' => array(
+            'tamanho' => 2,
+            'default' => '01',
+            'tipo' => 'int',
+            'required' => true
+        ),
+        'literal_servico' => array(
+            'tamanho' => 15,
+            'default' => 'COBRANCA',
+            'tipo' => 'alfa',
+            'required' => true
+        ),
+        'codigo_transmissao' => array(
+            'tamanho' => 20,
+            'default' => '0',
+            'tipo' => 'int',
+            'required' => true
+        ),
+        'nome_empresa' => array(
+            'tamanho' => 30,
+            'default' => ' ',
+            'tipo' => 'alfa',
+            'required' => true
+        ),
+        'codigo_banco' => array(
+            'tamanho' => 3,
+            'default' => '033',
+            'tipo' => 'int',
+            'required' => true
+        ),
+        'nome_banco' => array(
+            'tamanho' => 15,
+            'default' => 'SANTANDER',
+            'tipo' => 'alfa',
+            'required' => true
+        ),
+        'data_gravacao' => array(
+            'tamanho' => 6,
             'default' => '', // nao informar a data na instanciação - gerada dinamicamente
             'tipo' => 'date',
             'required' => true
         ),
-        'filler4' => array(
-            'tamanho' => 6,
+        'filler1' => array(
+            'tamanho' => 16,
+            'default' => '0',
+            'tipo' => 'int',
+            'required' => true
+        ),
+        'filler2' => array(
+            'tamanho' => 275,
             'default' => ' ',
             'tipo' => 'alfa',
             'required' => true
         ),
-        'numero_sequencial_arquivo' => array(
-            'tamanho' => 6,
-            'default' => '',
-            'tipo' => 'int',
-            'required' => true
-        ),
-        'versao_layout' => array(
+        'filler3' => array(
             'tamanho' => 3,
-            'default' => '040',
+            'default' => '0',
             'tipo' => 'int',
             'required' => true
         ),
-        'filler5' => array(
-            'tamanho' => 74,
-            'default' => ' ',
-            'tipo' => 'alfa',
+        'numero_sequencial' => array(
+            'tamanho' => 6,
+            'default' => '1',
+            'tipo' => 'int',
             'required' => true
         ),
     );
+
+    public function inserirDetalhe($data)
+    {
+        $class = 'CnabPHP\resources\\B' . RemessaAbstract::$banco . '\remessa\\' . RemessaAbstract::$layout . '\Registro1';
+        $this->children[] = new $class($data);
+    }
 }
